@@ -1,0 +1,8 @@
+<article>
+	<h2>Edit Person</h2>
+
+	<form action="<%= c.people_update_path(c.person.get("id")) %>">
+		Name: <input type="text" name="name" value="<%= c.person.get("name") %>" required />
+		<button type="submit" name="submit">Update</button>
+	</form>
+</article>

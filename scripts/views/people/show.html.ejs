@@ -1,0 +1,6 @@
+<article>
+	<h2>Person</h2>
+	Name: <%= c.person.get("name"); %><br>
+	<a href="<%= c.people_edit_path(c.person.get("id")); %>">Edit</a>
+	<a href="<%= c.people_destroy_path(c.person.get("id")); %>">Delete</a>
+</article>

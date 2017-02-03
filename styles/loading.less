@@ -1,0 +1,145 @@
+.loading {
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(255, 255, 255, 0.5);
+
+	> div {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		.windows8 {
+			position: relative;
+			width: 140px;
+			height:140px;
+			margin:auto;
+		}
+
+		.windows8 .wBall {
+			position: absolute;
+			width: 133px;
+			height: 133px;
+			opacity: 0;
+			transform: rotate(225deg);
+				-o-transform: rotate(225deg);
+				-ms-transform: rotate(225deg);
+				-webkit-transform: rotate(225deg);
+				-moz-transform: rotate(225deg);
+			animation: orbit 3.6325s infinite;
+				-o-animation: orbit 3.6325s infinite;
+				-ms-animation: orbit 3.6325s infinite;
+				-webkit-animation: orbit 3.6325s infinite;
+				-moz-animation: orbit 3.6325s infinite;
+		}
+
+		.windows8 .wBall .wInnerBall{
+			position: absolute;
+			width: 18px;
+			height: 18px;
+			background: rgb(0,0,0);
+			left:0px;
+			top:0px;
+			border-radius: 18px;
+		}
+
+		.windows8 #wBall_1 {
+			animation-delay: 0.796s;
+				-o-animation-delay: 0.796s;
+				-ms-animation-delay: 0.796s;
+				-webkit-animation-delay: 0.796s;
+				-moz-animation-delay: 0.796s;
+		}
+
+		.windows8 #wBall_2 {
+			animation-delay: 0.153s;
+				-o-animation-delay: 0.153s;
+				-ms-animation-delay: 0.153s;
+				-webkit-animation-delay: 0.153s;
+				-moz-animation-delay: 0.153s;
+		}
+
+		.windows8 #wBall_3 {
+			animation-delay: 0.3165s;
+				-o-animation-delay: 0.3165s;
+				-ms-animation-delay: 0.3165s;
+				-webkit-animation-delay: 0.3165s;
+				-moz-animation-delay: 0.3165s;
+		}
+
+		.windows8 #wBall_4 {
+			animation-delay: 0.4695s;
+				-o-animation-delay: 0.4695s;
+				-ms-animation-delay: 0.4695s;
+				-webkit-animation-delay: 0.4695s;
+				-moz-animation-delay: 0.4695s;
+		}
+
+		.windows8 #wBall_5 {
+			animation-delay: 0.633s;
+				-o-animation-delay: 0.633s;
+				-ms-animation-delay: 0.633s;
+				-webkit-animation-delay: 0.633s;
+				-moz-animation-delay: 0.633s;
+		}
+
+
+
+		@keyframes orbit {
+			0% {
+				opacity: 1;
+				z-index:99;
+				transform: rotate(180deg);
+				animation-timing-function: ease-out;
+			}
+
+			7% {
+				opacity: 1;
+				transform: rotate(300deg);
+				animation-timing-function: linear;
+				origin:0%;
+			}
+
+			30% {
+				opacity: 1;
+				transform:rotate(410deg);
+				animation-timing-function: ease-in-out;
+				origin:7%;
+			}
+
+			39% {
+				opacity: 1;
+				transform: rotate(645deg);
+				animation-timing-function: linear;
+				origin:30%;
+			}
+
+			70% {
+				opacity: 1;
+				transform: rotate(770deg);
+				animation-timing-function: ease-out;
+				origin:39%;
+			}
+
+			75% {
+				opacity: 1;
+				transform: rotate(900deg);
+				animation-timing-function: ease-out;
+				origin:70%;
+			}
+
+			76% {
+			opacity: 0;
+				transform:rotate(900deg);
+			}
+
+			100% {
+			opacity: 0;
+				transform: rotate(900deg);
+			}
+		}
+	}
+}

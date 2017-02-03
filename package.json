@@ -1,0 +1,17 @@
+{
+  "name": "yorktech",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "debug": "browserify -t [ stringify --extensions [.ejs] ] scripts/app.js > bundle.js && lessc styles/all.less > master.css",
+    "release": "browserify -t [ stringify --extensions [.ejs] ] scripts/app.js | uglifyjs -c -m > bundle.js && lessc --clean-css styles/all.less > master.css"
+  },
+  "author": "Sam Boylett",
+  "license": "ISC",
+  "dependencies": {
+    "mvc": "file:../mvc",
+    "stringify": "^5.1.0",
+    "whois": "^2.3.6"
+  }
+}

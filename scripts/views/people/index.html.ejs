@@ -1,0 +1,13 @@
+<article>
+	<h1>People</h1>
+	<ul>
+		<% for (var i = 0; i < c.people.length; i++) { %>
+			<li>
+				<a href="<%= c.people_path(c.people[i].get("id")); %>">
+					<%= c.people[i].get("name"); %>
+				</a>
+			</li>
+		<% } %>
+	</ul>
+	<a href="<%= c.people_new_path() %>">New</a>
+</article>
