@@ -1,3 +1,5 @@
+/* globals Promise */
+
 module.exports = function(Base) {
 	function People() {
 		Base.apply(this, arguments);
@@ -8,21 +10,27 @@ module.exports = function(Base) {
 		var self = this,
 			Person = this.model("Person");
 
-		Person.find(this.params.id, function(data) {
-			self.person = data;
-			if (f) {
-				f(self.person);
-			}
-		});
+		return Person.find(this.params.id)
+			.then(function(data) {
+				self.person = data;
+
+				if (f) {
+					f(self.person);
+				}
+
+				return new Promise(function(resolve) {
+					resolve(data);
+				});
+			});
 	};
 
 	People.prototype.index = function() {
 		var self = this;
-		this.model("Person").all(
-			function(data) {
+		this.model("Person").all()
+			.then(function(data) {
 				self.people = data;
-			},
-			function(error) {
+			})
+			.catch(function(error) {
 				error.handle();
 				self.showError("Couldn't load people");
 			});
@@ -40,14 +48,14 @@ module.exports = function(Base) {
 
 		this.person = new Person(this.params);
 
-		this.person.save(
-			function() {
-				self.redirect(self.people_path(self.person.get("id")));
-			},
-			function() {
+		this.person.save()
+			.then(function() {
+				self.rewrite(self.people_path(self.person.get("id")));
+				self.render("show");
+			})
+			.catch(function() {
 				self.render("new");
-			}
-		);
+			});
 	};
 
 	People.prototype.show = function() {
@@ -58,31 +66,31 @@ module.exports = function(Base) {
 
 	People.prototype.update = function() {
 		var self = this;
-		this.getPerson(function(p) {
-			p.update(
-				self.params,
-				function() {
-					self.redirect(self.people_path(p.get("id")));
-				},
-				function() {
-					self.render("edit");
-				}
-			);
-		});
+		this.getPerson()
+			.then(function(p) {
+				return p.update(self.params);
+			})
+			.then(function(p) {
+				self.rewrite(self.people_path(p.get("id")));
+				self.render("show");
+			})
+			.catch(function() {
+				self.render("edit");
+			});
 	};
 
 	People.prototype.destroy = function() {
 		var self = this;
-		this.getPerson(function(p) {
-			p.destroy(
-				function() {
-					self.redirect(self.people_path());
-				},
-				function() {
-					self.render("show");
-				}
-			);
-		});
+		this.getPerson()
+			.then(function(p) {
+				return p.destroy();
+			})
+			.then(function() {
+				self.redirect(self.people_path());
+			})
+			.catch(function() {
+				self.render("show");
+			});
 	};
 
 	return People;

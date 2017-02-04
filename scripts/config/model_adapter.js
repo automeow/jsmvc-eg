@@ -51,14 +51,20 @@ module.exports = function(Errors) {
 	};
 
 	Adapter.prototype.save = function(data) {
+		var self = this;
+
 		if (this.get("id")) {
-			return setTimeout(data, PRETEND_WAIT);
+			return setTimeout(function() {
+				data(self);
+			}, PRETEND_WAIT);
 		}
 		var name = this.constructor.name;
 		cache[name] = cache[name] || new Cache();
 		this.set("id", cache[name].push(this));
 
-		setTimeout(data, PRETEND_WAIT);
+		return setTimeout(function() {
+			data(self);
+		}, PRETEND_WAIT);
 	};
 
 	Adapter.prototype.destroy = function(data, error) {
